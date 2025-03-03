@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="200" viewBox="0 0 600 200">
+    <defs>
+        <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color: #48bb78; stop-opacity: 1" />
+            <stop offset="100%" style="stop-color: #2d6a4f; stop-opacity: 1" />
+        </linearGradient>
+        <clipPath id="clip-text">
+            <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" font-size="96" font-weight="bold"
+                fill="url(#gradient1)" font-family="'SF Pro', -apple-system, sans-serif">nutribud.</text>
+        </clipPath>
+    </defs>
+    <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" font-size="96" font-weight="bold"
+        fill="url(#gradient1)" font-family="'SF Pro', -apple-system, sans-serif" clip-path="url(#clip-text)">
+        nutribud.
+    </text>
+</svg>
