@@ -6,8 +6,8 @@ const Onboarding3 = () => {
 
   return (
     <View style={styles.container}>
-      <Image source={require("../../assets/logo.png")} style={styles.image} />
-      <Text style={styles.title}>Make connections with NutriBud</Text>
+      <Image source={require("../../assets/o1.png")} style={styles.image} />
+      <Text style={styles.title}>Make connections</Text>
       <Text style={styles.subtitle}>To your health journey</Text>
       <View style={styles.pagination}>
         <View style={styles.dot} />
@@ -29,17 +29,17 @@ export default Onboarding3;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
     backgroundColor: "#fff",
-    paddingHorizontal: 20,
+    alignItems: "center",
   },
   image: {
-    width: 300,
-    height: 300,
-    resizeMode: "contain",
+    width: "100%",
+    height: "55%",
+    resizeMode: "cover",
+    marginBottom: 20,
   },
   title: {
+    marginTop: 20,
     fontSize: 24,
     fontWeight: "bold",
     textAlign: "center",

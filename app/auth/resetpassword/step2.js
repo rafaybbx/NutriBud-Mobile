@@ -32,7 +32,7 @@ export default function ConfirmEmail() {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView contentContainerStyle={styles.scrollContainer}>
           {/* Illustration */}
-          <Image source={require('../../../assets/logo.png')} style={styles.illustration} />
+          <Image source={require('../../../assets/enteremail.png')} style={styles.illustration} />
 
           {/* Heading */}
           <Text style={styles.title}>Confirm Your Email</Text>
@@ -75,7 +75,7 @@ export default function ConfirmEmail() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: 'white' },
   scrollContainer: { flexGrow: 1, justifyContent: 'center', alignItems: 'center', padding: 20 },
-  illustration: { width: 250, height: 150, resizeMode: 'contain', marginBottom: 20 },
+  illustration: { width: 320, height: 320, resizeMode: 'contain', marginBottom: 10,marginBottom:-50 },
   title: { fontSize: 22, fontWeight: 'bold', marginBottom: 5, textAlign: 'center' },
   subtitle: { fontSize: 14, color: 'gray', textAlign: 'center', marginBottom: 20 },
   email: { color: '#4CAF50', fontWeight: 'bold' },

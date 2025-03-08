@@ -15,71 +15,79 @@ const login = () => {
       style={styles.container}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <ScrollView contentContainerStyle={styles.scrollView}>
-        {/* Welcome Message 
-        <Text style={styles.welcomeText}>Welcome Back!</Text>
-        <Text style={styles.subText}>Let’s login to start your fitness journey!</Text>
+    <ScrollView contentContainerStyle={styles.scrollView}>
+
+ {/* Sign-up Link 
+    <Image source={require("../../assets/bg3.png")} style={styles.topimage} />
 */}
-        {/* Logo */}
-        <Image source={require("../../assets/logo.png")} style={styles.logo} />
-        <Text style={styles.subText2}>Let’s login to start your fitness journey!</Text>
-
-        {/* Email Input */}
-        <View style={styles.inputContainer}>
+    <View style={styles.container2}>
+ 
+      {/* Logo */}
+      <Image source={require("../../assets/logo.png")} style={styles.logo} />
+      <Text style={styles.subText2}>Let's login to start your fitness journey!</Text>
+      
+          {/* Email Input */}
+          <View style={styles.inputContainer}>
           <FontAwesome name="envelope" size={20} color="gray" style={styles.icon} />
-          <TextInput
-            style={styles.input}
-            placeholder="Email or Phone Number"
-            value={email}
-            onChangeText={setEmail}
-            keyboardType="email-address"
-          />
-          {email.includes("@") && <FontAwesome name="check-circle" size={20} color="green" style={styles.iconRight} />}
-        </View>
+            <TextInput
+              style={styles.input}
+              placeholder="Email or Phone Number"
+              value={email}
+              onChangeText={setEmail}
+              keyboardType="email-address"
+            />
+            {email.includes("@") && <FontAwesome name="check-circle" size={20} color="green" style={styles.iconRight} />}
+          </View>
 
-        {/* Password Input */}
-        <View style={styles.inputContainer}>
-          <Feather name="lock" size={20} color="gray" style={styles.icon} />
-          <TextInput
-            style={styles.input}
-            placeholder="Password"
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry={!passwordVisible}
-          />
-          <TouchableOpacity onPress={() => setPasswordVisible(!passwordVisible)}>
-            <Feather name={passwordVisible ? "eye-off" : "eye"} size={20} color="gray" style={styles.iconRight} />
-          </TouchableOpacity>
-        </View>
+          {/* Password Input */}
+          <View style={styles.inputContainer}>
+            <Feather name="lock" size={20} color="gray" style={styles.icon} />
+            <TextInput
+              style={styles.input}
+              placeholder="Password"
+              value={password}
+              onChangeText={setPassword}
+              secureTextEntry={!passwordVisible}
+            />
+            <TouchableOpacity onPress={() => setPasswordVisible(!passwordVisible)}>
+              <Feather name={passwordVisible ? "eye-off" : "eye"} size={20} color="gray" style={styles.iconRight} />
+            </TouchableOpacity>
+          </View>
 
-        {/* Remember Me & Forgot Password */}
-        <View style={styles.row}>
-          <TouchableOpacity onPress={() => setRememberMe(!rememberMe)} style={styles.checkboxContainer}>
-            <FontAwesome name={rememberMe ? "check-square" : "square-o"} size={20} color="#4CAF50" />
-            <Text style={styles.rememberText}>Remember me</Text>
-          </TouchableOpacity>
-          <TouchableOpacity  onPress={() => router.push("/auth/resetpassword")}>
-            <Text style={styles.forgotPassword}>Forgot password</Text>
-          </TouchableOpacity>
-        </View>
-
-        {/* Sign-in Button */}
-        <TouchableOpacity style={styles.signInButton} onPress={() => router.push("/auth/loginsuccess")}>
-          <Text style={styles.signInText}>Sign in</Text>
-        </TouchableOpacity>
-
-        {/* Social Logins */}
-        <Text style={styles.connectText}>You can Connect with</Text>
-        <View style={styles.socialIcons}>
+          {/* Remember Me & Forgot Password */}
+          <View style={styles.row}>
+            <TouchableOpacity onPress={() => setRememberMe(!rememberMe)} style={styles.checkboxContainer}>
+              <FontAwesome name={rememberMe ? "check-square" : "square-o"} size={20} color="#4CAF50" />
+              <Text style={styles.rememberText}>Remember me</Text>
+            </TouchableOpacity>
+            <TouchableOpacity  onPress={() => router.push("/auth/resetpassword")}>
+              <Text style={styles.forgotPassword}>Forgot password</Text>
+            </TouchableOpacity>
+            </View>
+            
+            {/* Sign-in Button */}
+            <TouchableOpacity style={styles.signInButton} onPress={() => router.push("/auth/loginsuccess")}>
+            <Text style={styles.signInText}>Sign in</Text>
+            </TouchableOpacity>
+            
+            {/* Social Logins */}
+          <Text style={styles.connectText}>You can Connect with</Text>
+          <View style={styles.socialIcons}>
           <FontAwesome name="facebook" size={30} color="#1877F2" />
           <FontAwesome name="google" size={30} color="#4CAF50" />
           <FontAwesome name="apple" size={30} color="black" />
-        </View>
+          </View>
+          
+          {/* Sign-up Link */}
+          <Text style={styles.signUpText}>
+          Don't have an account? <Text style={styles.signUpLink} onPress={() => router.push("/auth/signup")}>Sign Up here</Text>
+          </Text>
 
-        {/* Sign-up Link */}
-        <Text style={styles.signUpText}>
-          Don’t have an account? <Text style={styles.signUpLink} onPress={() => router.push("/auth/signup")}>Sign Up here</Text>
-        </Text>
+
+        </View>
+         {/* Sign-up Link 
+        <Image source={require("../../assets/bg2.png")} style={styles.bottomimage} />
+        */}
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -89,18 +97,25 @@ login.options = {
 };
 export default login;
 
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingHorizontal: 20,
     backgroundColor: "#fff",
+  },
+    container2: {
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 20,
+    flex: 1,
   },
   scrollView: {
     flexGrow: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    width: "100%",
+    // marginTop:120,
+    // backgroundColor:'red',
   },
   welcomeText: {
     fontSize: 24,
@@ -113,14 +128,16 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   subText2: {
-    fontSize: 14,
+    fontSize: 16,
     color: "gray",
-    marginBottom: 20,
+    marginBottom: 15,
+    textAlign: 'center',
   },
   logo: {
-    width: 198,
-    height: 50,
-    marginBottom: -18,
+    width: 250,
+    height: 63,
+    marginBottom: -20,
+    alignSelf: 'center',
   },
   brandName: {
     fontSize: 18,
@@ -199,5 +216,20 @@ const styles = StyleSheet.create({
   signUpLink: {
     color: "#4CAF50",
     fontWeight: "bold",
+  },
+
+    topimage: {
+    width: "100%",
+    height: "55%",
+    resizeMode: "cover",
+    marginBottom: 20,
+    marginTop: -100,
+  },
+  bottomimage: {
+    width: "100%",
+    height: "55%",
+    resizeMode: "cover",
+    marginTop: 0,
+    marginBottom: -400,
   },
 });

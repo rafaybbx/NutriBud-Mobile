@@ -6,7 +6,7 @@ export default function ResetSuccess() {
 
   return (
     <View style={styles.container}>
-      <Image source={require('../../../assets/logo.png')} style={styles.image} />
+      <Image source={require('../../../assets/succ.png')} style={styles.image} />
       <Text style={styles.title}>Yey! Reset Successful</Text>
       <Text style={styles.subtitle}>
         You will be moved to the login screen right now.{'\n'}Login and enjoy the features!
@@ -27,10 +27,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   image: {
-    width: 200,
-    height: 200,
-    marginBottom: 20,
+    width: 350,
+    height: 350,
+    marginBottom: -15,
     resizeMode: 'contain',
+    paddingLeft:30,
   },
   title: {
     fontSize: 20,

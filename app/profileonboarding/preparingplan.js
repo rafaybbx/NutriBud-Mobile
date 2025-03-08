@@ -36,7 +36,7 @@ export default function PreparingPlanScreen() {
       </Text>
 
       {/* Progress Bar */}
-      <Progress.Bar progress={progress} width={200} color="green" style={styles.progressBar} />
+      <Progress.Bar progress={progress} width={200} color="#4CAF50" style={styles.progressBar} />
 
       {/* Progress Percentage */}
       <Text style={styles.progressText}>{Math.round(progress * 100)}%</Text>

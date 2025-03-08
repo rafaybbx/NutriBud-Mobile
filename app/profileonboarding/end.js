@@ -6,7 +6,7 @@ export default function end() {
 
   return (
     <View style={styles.container}>
-      <Image source={require('../../assets/logo.png')} style={styles.image} />
+      <Image source={require('../../assets/welcome2.png')} style={styles.image} />
       <Text style={styles.title}> Welcome John</Text>
       <Text style={styles.subtitle}>
         You will be moved to the home screen right now.{'\n'}Enjoy the features!
@@ -25,10 +25,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
     backgroundColor: '#fff',
+    
+
   },
   image: {
-    width: 200,
-    height: 200,
+    width: 350,
+    height: 350,
     marginBottom: 20,
     resizeMode: 'contain',
   },

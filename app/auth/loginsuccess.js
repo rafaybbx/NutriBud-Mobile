@@ -6,7 +6,7 @@ export default function LoginSuccess() {
 
   return (
     <View style={styles.container}>
-      <Image source={require('../../assets/logo.png')} style={styles.image} />
+      <Image source={require('../../assets/succ.png')} style={styles.image} />
       <Text style={styles.title}>Yey! Login Successful</Text>
       <Text style={styles.subtitle}>
         You will be moved to the home screen right now.{'\n'}Enjoy the features!
@@ -27,10 +27,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   image: {
-    width: 200,
-    height: 200,
-    marginBottom: 20,
+    width: 400,
+    height: 400,
+    marginBottom: 0,
     resizeMode: 'contain',
+    paddingLeft: 35,
   },
   title: {
     fontSize: 20,

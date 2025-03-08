@@ -22,12 +22,12 @@ export default function SignupStep2() {
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView contentContainerStyle={styles.scrollContainer}>
-          <Text style={styles.title}>Create Your Account</Text>
-          <Text style={styles.subtitle}>Create account for easy fitness</Text>
 
           {/* Logo */}
-          <Image source={require('../../../assets/logo.png')} style={styles.logo} />
+          <Image source={require('../../../assets/enterdetails.png')} style={styles.logo} />
           <Text style={styles.brandName}>Enter Your Details</Text>
+          <Text style={styles.subtitle}>Create Your Profile!</Text>
+
 
           {/* Input Fields */}
           <View style={styles.inputContainer}>
@@ -94,14 +94,14 @@ export default function SignupStep2() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: 'white' },
-  scrollContainer: { flexGrow: 1, justifyContent: 'center', alignItems: 'center', padding: 20 },
+  scrollContainer: { flexGrow: 1, justifyContent: 'center', alignItems: 'center', padding: 20,marginTop: -20 },
   title: { fontSize: 22, fontWeight: 'bold', marginBottom: 5 },
-  subtitle: { fontSize: 14, color: 'gray', marginBottom: 20 },
-  logo: { width: 200, height: 80, marginBottom: 10 },
+  subtitle: { fontSize: 14, color: 'gray', marginBottom: 20,marginTop: -20 },
+  logo: { width: 350, height: 350, marginBottom: -35 },
   brandName: { fontSize: 18, fontWeight: 'bold', marginBottom: 20 },
   inputContainer: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#f7f7f7', borderRadius: 10, paddingHorizontal: 10, width: '100%', height: 50, marginBottom: 15 },
   icon: { marginRight: 10 },
   input: { flex: 1, fontSize: 16, color: 'black' },
-  button: { backgroundColor: '#4CAF50', paddingVertical: 15, borderRadius: 10, width: '100%', alignItems: 'center', marginTop: 20 },
+  button: { backgroundColor: '#4CAF50', paddingVertical: 15, borderRadius: 10, width: '100%', alignItems: 'center', marginTop: 10 },
   buttonText: { color: 'white', fontSize: 16, fontWeight: 'bold' },
 });

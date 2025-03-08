@@ -7,7 +7,7 @@ export default function OnboardingScreen() {
   return (
     <View style={styles.container}>
       <Image
-        source={{ uri: 'https://your-image-url.com' }} // Replace with actual image URL
+        source={require("../../assets/food.png")}// Replace with actual image URL
         style={styles.image}
       />
       <Text style={styles.title}>Enjoy your lunch time</Text>
@@ -37,8 +37,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   image: {
-    width: '100%',
-    height: 250,
+    width: '320',
+    height: 320,
     borderRadius: 10,
     marginBottom: 20,
   },

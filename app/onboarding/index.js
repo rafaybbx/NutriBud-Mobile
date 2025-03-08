@@ -6,9 +6,9 @@ const Onboarding1 = () => {
 
   return (
     <View style={styles.container}>
-      <Image source={require("../../assets/logo.png")} style={styles.image} />
-      <Text style={styles.title}>Explore the world easily</Text>
-      <Text style={styles.subtitle}>To your desire</Text>
+      <Image source={require("../../assets/o3.png")} style={styles.image} />
+      <Text style={styles.title}>Explore the World </Text>
+      <Text style={styles.subtitle}>To your destination</Text>
       <View style={styles.pagination}>
         <View style={[styles.dot, styles.activeDot]} />
         <View style={styles.dot} />
@@ -26,17 +26,17 @@ export default Onboarding1;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
     backgroundColor: "#fff",
-    paddingHorizontal: 20,
+    alignItems: "center",
   },
   image: {
-    width: 300,
-    height: 300,
-    resizeMode: "contain",
+    width: "100%",
+    height: "55%",
+    resizeMode: "cover",
+    marginBottom: 20,
   },
   title: {
+    marginTop: 20,
     fontSize: 24,
     fontWeight: "bold",
     textAlign: "center",

@@ -17,7 +17,7 @@ export default function ResetPassword() {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView contentContainerStyle={styles.scrollContainer}>
           {/* Illustration */}
-          <Image source={require('../../../assets/logo.png')} style={styles.illustration} />
+          <Image source={require('../../../assets/resetpass.png')} style={styles.illustration} />
 
           {/* Heading */}
           <Text style={styles.title}>Reset Your Password</Text>
@@ -53,7 +53,7 @@ export default function ResetPassword() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: 'white' },
   scrollContainer: { flexGrow: 1, justifyContent: 'center', alignItems: 'center', padding: 20 },
-  illustration: { width: 250, height: 150, resizeMode: 'contain', marginBottom: 20 },
+  illustration: { width: 300, height: 300, resizeMode: 'contain', marginBottom: 20 },
   title: { fontSize: 22, fontWeight: 'bold', marginBottom: 5, textAlign: 'center' },
   subtitle: { fontSize: 14, color: 'gray', textAlign: 'center', marginBottom: 20 },
   label: { fontSize: 16, fontWeight: 'bold', alignSelf: 'flex-start', marginBottom: 5 },
