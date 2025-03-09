@@ -1,14 +1,18 @@
-import { Stack } from "expo-router";
+import { Stack, useLocalSearchParams } from "expo-router";
 import CustomPageHeader from "../../components/headerpage";
-import { View, Text, StyleSheet, TouchableOpacity, Image, Platform } from 'react-native';
 
 export default function PagesLayout() {
+  const params = useLocalSearchParams();
+  const pageTitle = params.title || "Default Title"; 
+
   return (
-    <View>
-    <CustomPageHeader/>
-    <Stack screenOptions={{ headerShown: false }}>
-    <Stack.Screen name="notifications" />      
+    <Stack
+      screenOptions={{
+        header: () => <CustomPageHeader pageTitle={pageTitle} />,
+      }}
+    >
+      <Stack.Screen name="notifications" />
+      <Stack.Screen name="mealdetails" />
     </Stack>
-    </View>
   );
 }

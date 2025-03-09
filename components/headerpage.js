@@ -4,9 +4,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from "expo-router";
 
-const CustomPageHeader = ({
-  userName = "Abdul Rafay",
-}) => {
+const CustomPageHeader = ({ pageTitle = "Page Title" }) => {
   const insets = useSafeAreaInsets();
   const router = useRouter();
 
@@ -21,12 +19,11 @@ const CustomPageHeader = ({
       </TouchableOpacity>
       
       <View style={styles.centerSection}>
-        <Text style={styles.nameText}>{userName}!</Text>
+        <Text style={styles.nameText}>{pageTitle}</Text>
       </View>
-       <View style={styles.notificationButton2}>
+      <View style={styles.notificationButton2}>
         <Text style={styles.nameText}></Text>
       </View>
-      
     </View>
   );
 };
@@ -42,16 +39,8 @@ const styles = StyleSheet.create({
   },
   centerSection: {
     flex: 1,
-    alignItems: 'center', // This centers the content horizontally
-    justifyContent: 'center', // This ensures it's vertically centered if needed
-
-  },
-  rightSection: {
-    flex: 1,
-    alignItems: 'center', // This centers the content horizontally
-    justifyContent: 'center', // This ensures it's vertically centered if needed
-        backgroundColor:"green",
-
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   nameText: {
     fontSize: 20,
@@ -60,10 +49,6 @@ const styles = StyleSheet.create({
   },
   notificationButton: {
     backgroundColor: '#F5F5F5',
-
-
-
-
     borderRadius: 50,
     width: 44,
     height: 44,
@@ -72,12 +57,8 @@ const styles = StyleSheet.create({
     marginRight: 12,
     position: 'relative',
   },
-    notificationButton2: {
+  notificationButton2: {
     backgroundColor: '#fff',
-
-
-
-
     borderRadius: 50,
     width: 44,
     height: 44,

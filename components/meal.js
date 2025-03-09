@@ -1,72 +1,72 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useRouter } from "expo-router";
 
 export const MealCard = ({ mealType, calories, items, macros }) => {
+    const router = useRouter();
+
+
+
   return (
-    <TouchableOpacity style={styles.container}>
-      <View style={styles.card}>
-        <View style={styles.leftContent}>
-          <View style={styles.pillContainer}>
-            <LinearGradient
-              colors={['#1a1a1a', '#333333']}
-              style={styles.pill}
-              start={{ x: 0, y: 0 }}
+    <TouchableOpacity style={styles.card}  onPress={() => router.push({ pathname: "/pages/mealdetails", params: { title: " Meal Details" } })}>
+      <LinearGradient
+colors={['#C1F4C5', '#E8F8E6']}
+        style={styles.gradient}
+         start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
-            >
-              <Text style={styles.pillText}>Next meal</Text>
-            </LinearGradient>
-          </View>
-          
-          <Text style={styles.mealTitle}>{mealType}</Text>
-          <Text style={styles.caloriesText}>({calories} kcal)</Text>
-          
-          {items.map((item, index) => (
-            <View key={index} style={styles.itemRow}>
-              <View style={styles.bullet} />
-              <Text style={styles.itemText}>{item.name} {item.amount}</Text>
-              <Text style={styles.itemCalories}>({item.calories} Cal)</Text>
-            </View>
-          ))}
-          
-          <View style={styles.macrosContainer}>
-            {Object.entries(macros).map(([key, value], index) => (
-              <View key={index} style={styles.macroItem}>
-                <Text style={styles.macroText}>{key} {value}</Text>
+      >
+        <View style={styles.contentContainer}>
+          <View style={styles.leftContent}>
+            <Text style={styles.mealTitle}>{mealType}</Text>
+            <Text style={styles.caloriesText}>({calories} kcal)</Text>
+            {items.map((item, index) => (
+              <View key={index} style={styles.itemRow}>
+                <View style={styles.bullet} />
+                <Text style={styles.itemText}>{item.name} {item.amount}</Text>
+                <Text style={styles.itemCalories}>({item.calories} Cal)</Text>
               </View>
             ))}
           </View>
+
+          <View style={styles.rightContent}>
+            <Image
+              source={require('../assets/food.png')}
+              style={styles.mealImage}
+              resizeMode="contain"
+            />
+          </View>
         </View>
         
-        <View style={styles.rightContent}>
-          <Image
-            source={require('../assets/logo.png')}
-            style={styles.mealImage}
-            resizeMode="contain"
-          />
+        <View style={styles.macrosContainer}>
+          {Object.entries(macros).map(([key, value], index) => (
+            <View key={index} style={styles.macroItem}>
+              <Text style={styles.macroText}>{key} {value}</Text>
+            </View>
+          ))}
         </View>
-      </View>
+      </LinearGradient>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    paddingHorizontal: 16,
-    marginVertical: 10,
-  },
   card: {
-    backgroundColor: 'white',
     borderRadius: 16,
-    padding: 16,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    overflow: 'hidden',
+    width: '92%',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
-    elevation: 3,
+  },
+  gradient: {
+    padding: 16,
+  },
+  contentContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 5,
   },
   leftContent: {
     flex: 3,
@@ -76,20 +76,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  pillContainer: {
-    marginBottom: 10,
-  },
-  pill: {
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 20,
-    alignSelf: 'flex-start',
-  },
-  pillText: {
-    color: 'white',
-    fontSize: 12,
-    fontWeight: '600',
   },
   mealTitle: {
     fontSize: 24,
@@ -125,21 +111,31 @@ const styles = StyleSheet.create({
   },
   macrosContainer: {
     flexDirection: 'row',
-    marginTop: 16,
     justifyContent: 'flex-start',
+    flexWrap: 'wrap',
+    borderTopWidth: 1,
+    borderTopColor: 'rgba(0,0,0,0.1)',
+    paddingTop: 12,
   },
   macroItem: {
-    marginRight: 12,
+    marginRight: 8,
+    marginBottom: 8,
+    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 20,
   },
   macroText: {
     fontSize: 14,
     fontWeight: '500',
-    color: '#555',
+    color: '#333',
   },
   mealImage: {
-    width: 80,
-    height: 80,
+    width: 100,
+    height: 100,
     borderRadius: 40,
+    // backgroundColor:'red',
+    marginLeft:-40,
   },
 });
 

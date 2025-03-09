@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Svg, Circle, G } from 'react-native-svg';
 import { Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export const ProgressCard = ({ calories, fatPercentage, proteinPercentage, carbPercentage, isCaloriesIncreasing = true }) => {
   // Function to render a progress circle
@@ -19,7 +20,7 @@ export const ProgressCard = ({ calories, fatPercentage, proteinPercentage, carbP
               cx={size/2}
               cy={size/2}
               r={radius}
-              stroke="#E6E6E6"
+              stroke="white"
               strokeWidth={strokeWidth}
               fill="transparent"
             />
@@ -46,53 +47,56 @@ export const ProgressCard = ({ calories, fatPercentage, proteinPercentage, carbP
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>Today's Progress</Text>
-        <TouchableOpacity>
-          <Text style={styles.viewMore}>View more</Text>
-        </TouchableOpacity>
-      </View>
-      
-      <View style={styles.content}>
-        <View style={styles.caloriesContainer}>
-          <View style={styles.caloriesTextContainer}>
-            <Ionicons 
-              name={isCaloriesIncreasing ? "arrow-up" : "arrow-down"} 
-              size={20} 
-              color={isCaloriesIncreasing ? "#4CAF50" : "#FF5252"} 
-            />
-            <Text style={styles.caloriesValue}>{calories.toLocaleString()}</Text>
+    <View style={styles.cardContainer}>
+      <LinearGradient
+colors={['#E8F8E6', '#C1F4C5']}
+        style={styles.container}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+      >
+        <View style={styles.content}>
+          <View style={styles.caloriesContainer}>
+            <View style={styles.caloriesTextContainer}>
+              <Ionicons 
+                name={isCaloriesIncreasing ? "arrow-up" : "arrow-down"} 
+                size={20} 
+                color={isCaloriesIncreasing ? "#4CAF50" : "#FF5252"} 
+              />
+              <Text style={styles.caloriesValue}>{calories.toLocaleString()}</Text>
+            </View>
+            <Text style={styles.caloriesLabel}>Calories</Text>
           </View>
-          <Text style={styles.caloriesLabel}>Calories</Text>
+          
+          <View style={styles.macrosContainer}>
+            <ProgressCircle percentage={fatPercentage} label="Fat" />
+            <ProgressCircle percentage={proteinPercentage} label="Pro" />
+            <ProgressCircle percentage={carbPercentage} label="Carb" />
+          </View>
         </View>
         
-        <View style={styles.macrosContainer}>
-          <ProgressCircle percentage={fatPercentage} label="Fat" />
-          <ProgressCircle percentage={proteinPercentage} label="Pro" />
-          <ProgressCircle percentage={carbPercentage} label="Carb" />
+        <View style={styles.motivationContainer}>
+          <Ionicons name="sunny" size={20} color="#FFC107" />
+          <Text style={styles.motivationText}>Keep the pace! You're doing great.</Text>
         </View>
-      </View>
-      
-      <View style={styles.motivationContainer}>
-        <Ionicons name="sunny" size={20} color="#FFC107" />
-        <Text style={styles.motivationText}>Keep the pace! You're doing great.</Text>
-      </View>
+      </LinearGradient>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'white',
+  cardContainer: {
+    width: '92%',
     borderRadius: 16,
-    padding: 16,
+    overflow: 'hidden', // Ensure gradient doesn't overflow rounded corners
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
-    width: '92%',
+  },
+  container: {
+    padding: 16,
+    borderRadius: 16,
   },
   header: {
     flexDirection: 'row',
@@ -162,7 +166,7 @@ const styles = StyleSheet.create({
   motivationContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#F5F5F5',
+    backgroundColor: 'rgba(245, 245, 245, 0.7)', // Semi-transparent background
     borderRadius: 16,
     padding: 12,
   },

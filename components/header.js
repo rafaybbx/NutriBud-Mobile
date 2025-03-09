@@ -25,7 +25,7 @@ const CustomHeader = ({
       <View style={styles.rightSection}>
         <TouchableOpacity 
           style={styles.notificationButton} 
-          onPress={() => router.push("/pages/notifications")}
+          onPress={() => router.push({ pathname: "/pages/notifications", params: { title: " Notifications " } })}
           activeOpacity={0.8}
         >
           <Ionicons name="notifications-outline" size={24} color="#333" />
@@ -64,6 +64,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingBottom: 15,
     backgroundColor: '#fff',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 8,
   },
   welcomeSection: {
     flex: 1,

@@ -18,6 +18,7 @@ const preloadImages = () => {
     require('../assets/enterdetails.png'),
     require('../assets/bg3.png'),
     require('../assets/food.png'),
+    require('../assets/ramen.png'),
 
   ];
 
