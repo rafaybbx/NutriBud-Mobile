@@ -13,6 +13,7 @@ export default function PagesLayout() {
     >
       <Stack.Screen name="notifications" />
       <Stack.Screen name="mealdetails" />
+      <Stack.Screen name="profile" />
     </Stack>
   );
 }

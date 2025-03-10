@@ -35,7 +35,7 @@ const CustomHeader = ({
         </TouchableOpacity>
         
         <TouchableOpacity 
-          onPress={onProfilePress}
+          onPress={() => router.push({ pathname: "/pages/profile", params: { title: " Settings & Profile " } })}
           activeOpacity={0.8}
         >
           {profileImageUrl ? (

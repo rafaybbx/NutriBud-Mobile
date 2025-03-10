@@ -1,0 +1,76 @@
+API Response: {
+  bmi: 12.47,
+  bmi_category: 'Severe Thinness',
+  calories: 2825.2705656638022,
+  dietplan: 'Breakfast:\n' +
+    '73494 - Acorn Squash Stuffed With Lamb &amp; Curry\n' +
+    '\n' +
+    'Lunch:\n' +
+    '99344 - Jhal Frezi Chicken--Easy and Delicious!\n' +
+    '94208 - Brinjal Masla (Eggplant (Aubergine))\n' +
+    '\n' +
+    'Dinner:\n' +
+    '76448 - Acorn Squash Stuffed with Curried Meat\n' +
+    '\n' +
+    'Snacks:\n' +
+    '62612 - Cranberry Chutney\n' +
+    '79422 - Dukkah (Spicy Nut Mix for Dipping With Flatbread)\n' +
+    'Total Calories of all meals selected for diet plan: 2825.27\n' +
+    'Total Macros of all meals selected for diet plan:\n' +
+    '\n' +
+    'Carbs: 388.0\n' +
+    'Protein: 177.0\n' +
+    'Fat: 63.0\n' +
+    'Meal IDs Used in the Diet Plan: [73494, 99344, 94208, 76448, 62612, 79422]',
+  ideal_body_weight: 84.05,
+  macros: {
+    Carbohydrates: { Grams: 388 },
+    Fat: { Grams: 63 },
+    Protein: { Grams: 177 }
+  },
+  meal_ids: [ 73494, 99344, 94208, 76448, 62612, 79422 ],
+  meal_names: [
+    'Cranberry Chutney',
+    'Acorn Squash Stuffed With Lamb &amp; Curry',
+    'Acorn Squash Stuffed with Curried Meat',
+    'Dukkah (Spicy Nut Mix for Dipping With Flatbread)',
+    'Brinjal Masla (Eggplant (Aubergine))',
+    'Jhal Frezi Chicken--Easy and Delicious!'
+  ],
+  recipes: 'ID: 62612, Recipe: Cranberry Chutney, Calories: 142.3, Carbs: 0.1g, Protein: 0.6g, Fat: 36.6g\n' +   
+    '\n' +
+    'ID: 63014, Recipe: Pakistani Fish Curry, Calories: 240.8, Carbs: 21.5g, Protein: 3.6g, Fat: 9.8g\n' +       
+    '\n' +
+    'ID: 68210, Recipe: Pistachio Shortbread, Calories: 135.0, Carbs: 7.8g, Protein: 2.3g, Fat: 14.6g\n' +       
+    '\n' +
+    'ID: 70232, Recipe: Coconut Curry Chicken With Potatoes, Calories: 796.2, Carbs: 49.8g, Protein: 40.8g, Fat: 
+50.4g\n' +
+    '\n' +
+    'ID: 73494, Recipe: Acorn Squash Stuffed With Lamb &amp; Curry, Calories: 1229.2, Carbs: 99.2g, Protein: 42.2g, Fat: 47.2g\n' +
+    '\n' +
+    'ID: 76448, Recipe: Acorn Squash Stuffed with Curried Meat, Calories: 1229.2, Carbs: 99.2g, Protein: 42.2g, Fat: 47.2g\n' +
+    '\n' +
+    'ID: 78984, Recipe: Chana Dal With Bell Pepper, Calories: 218.5, Carbs: 7.5g, Protein: 9.1g, Fat: 30.9g\n' + 
+    '\n' +
+    'ID: 79422, Recipe: Dukkah (Spicy Nut Mix for Dipping With Flatbread), Calories: 218.3, Carbs: 16.9g, Protein: 6.8g, Fat: 15.4g\n' +
+    '\n' +
+    'ID: 80098, Recipe: Cardamom Green Tea, Calories: 0.0, Carbs: 0.0g, Protein: 0.0g, Fat: 0.0g\n' +
+    '\n' +
+    'ID: 82734, Recipe: Yakni Pilau (Chicken Rice), Calories: 743.2, Carbs: 34.3g, Protein: 34.7g, Fat: 71.4g\n' 
++
+    '\n' +
+    'ID: 83246, Recipe: Curry Eggs over Rice (For Leftover Hard Boiled Eggs), Calories: 983.9, Carbs: 21.9g, Protein: 27.7g, Fat: 165.5g\n' +
+    '\n' +
+    'ID: 83652, Recipe: Roasted Curry Powder, Calories: 2018.4, Carbs: 78.9g, Protein: 93.6g, Fat: 333.2g\n' +   
+    '\n' +
+    'ID: 86128, Recipe: Tamarind Chutney (sauce), Calories: 181.5, Carbs: 0.4g, Protein: 1.7g, Fat: 47.9g\n' +   
+    '\n' +
+    'ID: 92152, Recipe: Chelo Nachodo (Chicken &amp; Chickpea Stew With Rice), Calories: 796.7, Carbs: 34.6g, Protein: 42.6g, Fat: 76.9g\n' +
+    '\n' +
+    'ID: 94208, Recipe: Brinjal Masla (Eggplant (Aubergine)), Calories: 157.3, Carbs: 13.0g, Protein: 2.6g, Fat: 
+9.9g\n' +
+    '\n' +
+    'ID: 99344, Recipe: Jhal Frezi Chicken--Easy and Delicious!, Calories: 492.4, Carbs: 25.7g, Protein: 48.0g, Fat: 18.1g\n' +
+    '\n' +
+    'ID: 99571, Recipe: Chicken, Rice, and Spices Bake, Calories: 898.4, Carbs: 24.2g, Protein: 54.9g, Fat: 112.4g\n'
+}

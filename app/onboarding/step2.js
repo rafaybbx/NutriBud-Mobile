@@ -1,5 +1,7 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { useRouter } from "expo-router";
+import * as SecureStore from "expo-secure-store";
+import { setHasSeenOnboarding } from "../../utils/storage";
 
 const Onboarding3 = () => {
   const router = useRouter();
@@ -14,7 +16,14 @@ const Onboarding3 = () => {
         <View style={styles.dot} />
         <View style={[styles.dot, styles.activeDot]} />
       </View>
-      <TouchableOpacity style={styles.button} onPress={() => router.replace("/auth/login")}>
+      <TouchableOpacity 
+        style={styles.button} 
+        onPress={async () => {
+          // Mark that the user has seen onboarding
+          await setHasSeenOnboarding(true);
+          router.replace("/auth/login");
+        }}
+      >
         <Text style={styles.buttonText}>Get Started →</Text>
       </TouchableOpacity>
     </View>
