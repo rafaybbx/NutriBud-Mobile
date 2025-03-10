@@ -1,8 +1,29 @@
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useRouter, useLocalSearchParams } from 'expo-router';
+import { useEffect, useState } from 'react';
 
 export default function OnboardingScreen() {
   const router = useRouter();
+  const params = useLocalSearchParams();
+  const [email, setEmail] = useState('');
+
+  useEffect(() => {
+    // Retrieve the email from the params
+    if (params && params.email) {
+      console.log("Email from params in onboarding:", params.email);
+      setEmail(params.email);
+    } else {
+      console.log("No email found in params:", params);
+    }
+  }, [params]);
+
+  const handleNext = () => {
+    // Pass the email to the next screen
+    router.push({
+      pathname: '/profileonboarding/step2',
+      params: { email }
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -21,7 +42,7 @@ export default function OnboardingScreen() {
         <View style={styles.dot} />
         <View style={styles.dot} />
       </View>
-      <TouchableOpacity style={styles.nextButton} onPress={() => router.push('/profileonboarding/step2')}>
+      <TouchableOpacity style={styles.nextButton} onPress={handleNext}>
         <Text style={styles.nextText}>Next</Text>
       </TouchableOpacity>
     </View>

@@ -160,12 +160,21 @@ export const removeItem = async (key) => {
 
 export const clearAllData = async () => {
   try {
+    // Save the onboarding flag
+    const hasSeenOnboarding = await SecureStore.getItemAsync('hasSeenOnboarding');
+    
+    // Clear all authentication-related data
     await SecureStore.deleteItemAsync("token");
     await SecureStore.deleteItemAsync("userData");
     await SecureStore.deleteItemAsync("authToken");
     await SecureStore.deleteItemAsync("rememberMe");
     await SecureStore.deleteItemAsync("userCredentials");
-    // Don't clear hasSeenOnboarding to avoid showing onboarding again
+    
+    // Restore the onboarding flag
+    if (hasSeenOnboarding === 'true') {
+      await SecureStore.setItemAsync('hasSeenOnboarding', 'true');
+    }
+    
     return true;
   } catch (error) {
     console.error("Error clearing all data:", error);

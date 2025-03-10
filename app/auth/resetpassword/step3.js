@@ -1,17 +1,74 @@
 import {
   View, Text, TextInput, TouchableOpacity, Image, StyleSheet,
-  KeyboardAvoidingView, ScrollView, Platform, TouchableWithoutFeedback, Keyboard
+  KeyboardAvoidingView, ScrollView, Platform, TouchableWithoutFeedback, Keyboard, Alert
 } from 'react-native';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from "expo-router";
+import * as SecureStore from "expo-secure-store";
+import { useAuth } from "../../../contexts/AuthContext";
 
 export default function NewPassword() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
-    const router = useRouter();
+  const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const { handleResetPasswordMobile } = useAuth();
+
+  useEffect(() => {
+    // Load email from secure storage
+    const getEmail = async () => {
+      const savedEmail = await SecureStore.getItemAsync('resetEmail');
+      if (savedEmail) {
+        setEmail(savedEmail);
+      } else {
+        // If no email is found, go back to the first step
+        Alert.alert("Error", "Email not found. Please try again.");
+        router.replace("/auth/resetpassword");
+      }
+    };
+    getEmail();
+  }, []);
+
+  const handleSubmit = async () => {
+    if (!password) {
+      Alert.alert("Error", "Please enter a new password");
+      return;
+    }
+    
+    if (password.length < 6) {
+      Alert.alert("Error", "Password must be at least 6 characters");
+      return;
+    }
+    
+    if (password !== confirmPassword) {
+      Alert.alert("Error", "Passwords do not match");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const result = await handleResetPasswordMobile(email, password, confirmPassword);
+      if (result.success) {
+        // Clear data before navigation
+        await SecureStore.deleteItemAsync('resetEmail');
+        await SecureStore.deleteItemAsync('verificationCode');
+        
+        // Set hasSeenOnboarding to true to prevent onboarding redirect
+        await SecureStore.setItemAsync('hasSeenOnboarding', 'true');
+        
+        // Navigate to success screen
+        router.push("/auth/resetpassword/resetsuccess");
+      }
+    } catch (error) {
+      Alert.alert("Error", error.message || "Failed to reset password");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <KeyboardAvoidingView
@@ -25,7 +82,7 @@ export default function NewPassword() {
 
           {/* Heading */}
           <Text style={styles.title}>Enter New Password</Text>
-          <Text style={styles.subtitle}>Set Complex passwords to protect</Text>
+          <Text style={styles.subtitle}>Set a strong password to protect your account</Text>
 
           {/* Password Input */}
           <Text style={styles.label}>Password</Text>
@@ -50,7 +107,7 @@ export default function NewPassword() {
             <Ionicons name="lock-closed-outline" size={20} color="#4CAF50" style={styles.icon} />
             <TextInput
               style={styles.input}
-              placeholder="Enter your password"
+              placeholder="Confirm your password"
               value={confirmPassword}
               onChangeText={setConfirmPassword}
               secureTextEntry={!confirmPasswordVisible}
@@ -62,8 +119,14 @@ export default function NewPassword() {
           </View>
 
           {/* Set Password Button */}
-          <TouchableOpacity style={styles.button} onPress={() => router.push("/auth/resetpassword/resetsuccess")}>
-            <Text style={styles.buttonText}>Set New Password</Text>
+          <TouchableOpacity 
+            style={[styles.button, loading && styles.buttonDisabled]} 
+            onPress={handleSubmit}
+            disabled={loading}
+          >
+            <Text style={styles.buttonText}>
+              {loading ? "Setting Password..." : "Set New Password"}
+            </Text>
           </TouchableOpacity>
 
           {/* Footer Links */}
@@ -91,5 +154,6 @@ const styles = StyleSheet.create({
   button: { backgroundColor: '#4CAF50', paddingVertical: 15, borderRadius: 10, width: '100%', alignItems: 'center', marginTop: 20 },
   buttonText: { color: 'white', fontSize: 16, fontWeight: 'bold' },
   footerText: { fontSize: 12, color: 'gray', marginTop: 20 },
+  buttonDisabled: { backgroundColor: '#a5d6a7' },
 });
 

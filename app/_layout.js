@@ -68,6 +68,33 @@ function RootLayoutNav() {
 
     const navigateBasedOnAuth = async () => {
       try {
+        // Check for a special bypass flag set by reset success
+        const bypassNavigation = await SecureStore.getItemAsync('bypassNavigation');
+        if (bypassNavigation === 'true') {
+          // Clear the flag
+          await SecureStore.deleteItemAsync('bypassNavigation');
+          // Skip all navigation logic
+          setLoading(false);
+          return;
+        }
+        
+        // Check if we're coming from password reset
+        const comingFromReset = await SecureStore.getItemAsync('comingFromReset');
+        
+        // If coming from reset, clear the flag and navigate to login
+        if (comingFromReset === 'true') {
+          console.log("Detected coming from reset password, clearing flag...");
+          await SecureStore.deleteItemAsync('comingFromReset');
+
+          setTimeout(async () => {
+            await router.replace("/auth/login");
+            setLoading(false);
+          }, 500);  // Delay to ensure flag is deleted before navigating
+          return;
+        }
+
+        
+        // Regular navigation logic continues below
         if (isAuthenticated) {
           console.log("User is authenticated, navigating to home");
           await router.replace("/(tabs)/home");
@@ -80,11 +107,13 @@ function RootLayoutNav() {
             await router.replace("/auth/login");
           } else {
             console.log("First time user, showing onboarding");
-            await router.replace("/onboarding/index");
+            await router.replace("/onboarding");
           }
         }
       } catch (error) {
         console.error("Navigation error:", error);
+        // Fallback to login screen if there's an error
+        await router.replace("/auth/login");
       } finally {
         // Set loading to false after navigation completes
         setLoading(false);
@@ -112,17 +141,24 @@ function RootLayoutNav() {
       )}
       
       {/* Stack navigator */}
-      <Stack screenOptions={{ headerShown: false }}>
+      <Stack 
+        screenOptions={{ 
+          headerShown: false,
+          // Disable gesture for all screens
+          gestureEnabled: false 
+        }}
+      >
         <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="auth" options={{ headerShown: false }} />
-        <Stack.Screen name="onboarding" options={{ headerShown: false }} />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false, gestureEnabled: true }} />
+        <Stack.Screen name="auth" options={{ headerShown: false, gestureEnabled: false }} />
+        <Stack.Screen name="onboarding" options={{ headerShown: false, gestureEnabled: false }} />
       </Stack>
     </>
   );
 }
 
 // Main export
+
 export default function RootLayout() {
   return (
     <AuthProvider>

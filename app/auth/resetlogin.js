@@ -1,3 +1,5 @@
+// Copy your login.js code here but with a different route
+// Then navigate to this page from resetsuccess.js 
 import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView, Platform, ScrollView, Alert, BackHandler } from "react-native";
 import { useRouter } from "expo-router";
@@ -74,7 +76,7 @@ const login = () => {
     
     try {
       setLoading(true);
-      await handleLogin(email, password, "user", rememberMe);
+      await handleLogin(email, password, "admin", rememberMe);
       
       // Mark that the user has seen onboarding
       await SecureStore.setItemAsync('hasSeenOnboarding', 'true');

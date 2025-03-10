@@ -1,20 +1,87 @@
-import { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useState, useEffect } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 
 export default function OnboardingStep4() {
   const router = useRouter();
-  const [selectedGoal, setSelectedGoal] = useState(null);
+  const params = useLocalSearchParams();
+  const [goal, setGoal] = useState(null);
+  const [userData, setUserData] = useState({});
+  const [email, setEmail] = useState('');
+  const [restrictions, setRestrictions] = useState([]);
+
+  useEffect(() => {
+    if (params) {
+      console.log("Received params in step4:", params);
+      
+      // Extract email separately
+      if (params.email) {
+        setEmail(params.email);
+      }
+      
+      // Parse restrictions from JSON string
+      let parsedRestrictions = [];
+      if (params.restrictions) {
+        try {
+          parsedRestrictions = JSON.parse(params.restrictions);
+          setRestrictions(parsedRestrictions);
+        } catch (error) {
+          console.error("Error parsing restrictions:", error);
+        }
+      }
+      
+      // Set other user data with proper type conversion
+      setUserData({
+        age: params.age ? parseInt(params.age) : 0,
+        height: params.height ? parseFloat(params.height) : 0,
+        weight: params.weight ? parseFloat(params.weight) : 0,
+        gender: params.gender || '',
+        activity_factor: params.activityFactor ? parseFloat(params.activityFactor) : 1.5,
+        cuisine: params.cuisine || ''
+      });
+    }
+  }, []);
+
+  const handleNext = () => {
+    if (!goal) return;
+    
+    // Format data in the required order and format
+    const formattedData = {
+      age: userData.age,
+      height: userData.height,
+      weight: userData.weight,
+      gender: userData.gender,
+      goal: goal,
+      activity_factor: userData.activity_factor,
+      cuisine: userData.cuisine,
+      restrictions: restrictions
+    };
+    
+    // Log the formatted data
+    console.log("Formatted user data:", formattedData);
+    console.log("User email:", email);
+    
+    // Navigate to the next screen with all data
+    router.push({
+      pathname: '/profileonboarding/preparingplan',
+      params: {
+        ...formattedData,
+        email: email,
+        // Convert objects/arrays to JSON strings for passing as params
+        restrictions: JSON.stringify(restrictions)
+      }
+    });
+  };
 
   return (
     <View style={styles.container}>
       {/* Progress Indicator */}
-          <View style={styles.stepContainer}>
-            <View style={styles.dot} />
-            <View style={styles.dot} />
-            <View style={styles.dot} />
-            <View style={[styles.dot, styles.activeDot]} />
-          </View>
+      <View style={styles.stepContainer}>
+        <View style={styles.dot} />
+        <View style={styles.dot} />
+        <View style={styles.dot} />
+        <View style={[styles.dot, styles.activeDot]} />
+      </View>
 
       {/* Title & Subtitle */}
       <Text style={styles.title}>What is Your Goal?</Text>
@@ -22,17 +89,17 @@ export default function OnboardingStep4() {
 
       {/* Goal Selection */}
       <TouchableOpacity
-        style={[styles.option, selectedGoal === 'lose' && styles.selectedOption]}
-        onPress={() => setSelectedGoal('lose')}
+        style={[styles.option, goal === 'Fat Loss' && styles.selectedOption]}
+        onPress={() => setGoal('Fat Loss')}
       >
-        <Text style={styles.optionText}>Lose weight</Text>
+        <Text style={styles.optionText}>Fat Loss</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={[styles.option, selectedGoal === 'gain' && styles.selectedOption]}
-        onPress={() => setSelectedGoal('gain')}
+        style={[styles.option, goal === 'Muscle Gain' && styles.selectedOption]}
+        onPress={() => setGoal('Muscle Gain')}
       >
-        <Text style={styles.optionText}>Gain weight</Text>
+        <Text style={styles.optionText}>Muscle Gain</Text>
       </TouchableOpacity>
 
       {/* Navigation Buttons */}
@@ -41,9 +108,9 @@ export default function OnboardingStep4() {
           <Text style={styles.prevText}>Previous</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.nextButton, !selectedGoal && styles.disabledButton]}
-          onPress={() => selectedGoal && router.push('/profileonboarding/preparingplan')}
-          disabled={!selectedGoal}
+          style={[styles.nextButton, !goal && styles.disabledButton]}
+          onPress={handleNext}
+          disabled={!goal}
         >
           <Text style={styles.nextText}>Next</Text>
         </TouchableOpacity>
@@ -70,7 +137,7 @@ const styles = StyleSheet.create({
   nextButton: { backgroundColor: '#4CAF50', padding: 15, borderRadius: 8, flex: 1, alignItems: 'center' },
   disabledButton: { backgroundColor: '#A5D6A7' },
   nextText: { color: 'white', fontWeight: 'bold' },
-    stepContainer: { flexDirection: 'row', justifyContent: 'center', marginBottom: 20 },
-    dot: { width: 8, height: 8, backgroundColor: '#ccc', borderRadius: 4, marginHorizontal: 4 },
+  stepContainer: { flexDirection: 'row', justifyContent: 'center', marginBottom: 20 },
+  dot: { width: 8, height: 8, backgroundColor: '#ccc', borderRadius: 4, marginHorizontal: 4 },
   activeDot: { backgroundColor: '#4CAF50', width: 16 },
 });

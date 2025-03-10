@@ -1,11 +1,51 @@
-import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, KeyboardAvoidingView, ScrollView, Platform, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, KeyboardAvoidingView, ScrollView, Platform, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { FontAwesome } from '@expo/vector-icons';
+import axios from 'axios'; // Assuming you're using axios for API calls
+
+import config from "../../../config"; // Adjust path if needed
+
 
 export default function SignupStep1() {
   const router = useRouter();
   const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const checkEmailRegistered = async (email) => {
+    try {
+      setLoading(true);
+      const response = await axios.post(`${config.API_BASE_URL}/api/auth/check-email`, { email });
+      setLoading(false);
+      return response.data.isRegistered;
+    } catch (error) {
+      setLoading(false);
+      console.error("Error checking email:", error);
+      Alert.alert("Error", "Failed to check email registration. Please try again.");
+      return false;
+    }
+  };
+
+  const handleContinue = async () => {
+    if (!validateEmail(email)) {
+      Alert.alert("Invalid Email", "Please enter a valid email address.");
+      return;
+    }
+
+    const isRegistered = await checkEmailRegistered(email);
+    if (isRegistered) {
+      Alert.alert("Email Already Registered", "This email is already registered. Please use a different email.");
+      return;
+    }
+
+    // If email is valid and not registered, proceed to the next step
+    router.push({ pathname: '/auth/signup/step2', params: { email } });
+  };
 
   return (
     <KeyboardAvoidingView 
@@ -14,8 +54,8 @@ export default function SignupStep1() {
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView contentContainerStyle={styles.scrollContainer}>
-        {/* Illustration */}
-        <Image source={require('../../../assets/login.png')} style={styles.illustration} />
+          {/* Illustration */}
+          <Image source={require('../../../assets/login.png')} style={styles.illustration} />
           {/* Title */}
           <Text style={styles.title}>Create Your Account</Text>
           <Text style={styles.subtitle}>Create account for easy fitness!</Text>
@@ -35,8 +75,8 @@ export default function SignupStep1() {
           </View>
 
           {/* Continue Button */}
-          <TouchableOpacity style={styles.button} onPress={() => router.push('/auth/signup/step2')}>
-            <Text style={styles.buttonText}>Continue</Text>
+          <TouchableOpacity style={styles.button} onPress={handleContinue} disabled={loading}>
+            <Text style={styles.buttonText}>{loading ? "Checking..." : "Continue"}</Text>
           </TouchableOpacity>
         </ScrollView>
       </TouchableWithoutFeedback>
