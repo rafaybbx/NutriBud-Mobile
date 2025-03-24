@@ -56,7 +56,7 @@ export default function PreparingPlanScreen() {
         setStatus('Creating your diet plan...');
         
         // First API call to create diet plan
-        const dietPlanResponse = await fetch(`${config.API_BASE_URL}/api/dietplan`, {
+        const dietPlanResponse = await fetch(`${config.API_BASE_URL}/api/dietplan/dietplan`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

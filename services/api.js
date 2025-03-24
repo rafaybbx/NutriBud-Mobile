@@ -4,7 +4,7 @@ import axios from "axios";
 import * as SecureStore from "expo-secure-store";
 import { clearAllData } from "../utils/storage";
 
-const API_URL = "https://better-masks-wish.loca.lt/api/auth";
+const API_URL = "https://modern-donkeys-appear.loca.lt/api/auth";
 
 // Create axios instance with timeout
 const api = axios.create({
